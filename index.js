@@ -1,7 +1,10 @@
 const axios = require("axios");
 const dotenv = require("dotenv");
 
-const url = dotenv.config().parsed.ekiUrl;
+const urlCommonPart = dotenv.config().parsed.ekiUrl;
+const urlTimePart = '&yyyymm=202303&day=5&hour=21&minute10=4&minute1=9'
+const url = urlCommonPart + urlTimePart;
+
 const tgtText = dotenv.config().parsed.targetText;
 
 const getStartEndTime = function(timeText){
