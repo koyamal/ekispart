@@ -16,18 +16,22 @@ const getStartEndTime = function(timeText){
 }
 
 const getDepatureTime = async function(){
-    const body = await axios(url);
-    const rowData = body.data;
-    const devidedData = rowData.split('\n');
+    const body = await axios(
+        url
+        ).then(
+            function(response){
+                const rowData = response.data;
+                const devidedData = rowData.split('\n');
 
-    for(let i = 0; i < devidedData.length; i++){
-        if(devidedData[i].includes(tgtText)){
-            const timeText = devidedData[i + 3];
-            const seTime = getStartEndTime(timeText);
-            console.log(seTime.startTime);
-            console.log(seTime.endTime);
-        }
-    }
+                for(let i = 0; i < devidedData.length; i++){
+                    if(devidedData[i].includes(tgtText)){
+                        const timeText = devidedData[i + 3];
+                        const seTime = getStartEndTime(timeText);
+                        console.log(seTime.startTime);
+                        console.log(seTime.endTime);
+                    }
+                }
+            });
 }
 
 getDepatureTime();
