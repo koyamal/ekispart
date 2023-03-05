@@ -22,15 +22,16 @@ const getDepatureTime = async function(){
             function(response){
                 const rowData = response.data;
                 const devidedData = rowData.split('\n');
+                let depatureTimes = [];
 
                 for(let i = 0; i < devidedData.length; i++){
                     if(devidedData[i].includes(tgtText)){
                         const timeText = devidedData[i + 3];
-                        const seTime = getStartEndTime(timeText);
-                        console.log(seTime.startTime);
-                        console.log(seTime.endTime);
+                        const startEndTime = getStartEndTime(timeText);
+                        depatureTimes.push(startEndTime);
                     }
                 }
+                console.log(depatureTimes);
             });
 }
 
