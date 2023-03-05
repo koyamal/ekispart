@@ -7,7 +7,9 @@ console.log(url);
 
 const getDepatureTime = async function(){
     const body = await axios(url);
-    console.log(body.data);
+    const rowData = body.data
+    console.log(rowData);
+    console.log(typeof rowData);
 }
 
 getDepatureTime();
