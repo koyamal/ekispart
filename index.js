@@ -11,7 +11,15 @@ const getDepatureTime = async function(){
 
     for(let i = 0; i < devidedData.length; i++){
         if(devidedData[i].includes(tgtText)){
-            console.log(devidedData[i]);
+            const timeText = devidedData[i + 3];
+            let startTime = "";
+            let endTime = "";
+            for(let j = 0; j < 5; j++){
+                startTime += timeText[j];
+                endTime += timeText[33 + j];
+            }
+            console.log(startTime);
+            console.log(endTime);
         }
     }
 }
