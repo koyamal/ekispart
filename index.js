@@ -5,10 +5,18 @@ const nowDate = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60
 const dateSet = {}
 
 dateSet.year = nowDate.getFullYear().toString();
-(nowDate.getMonth() + 1).toString().length === 2 ? dateSet.month = (nowDate.getMonth() + 1).toString(): dateSet.month = '0' + (nowDate.getMonth() + 1);
-nowDate.getDate().toString().length === 2 ? dateSet.day = nowDate.getDate().toString(): dateSet.day = '0' + nowDate.getDate();
-nowDate.getHours().toString().length === 2 ? dateSet.hour = nowDate.getHours().toString(): dateSet.hour = '0' + nowDate.getHours();
-nowDate.getMinutes().toString().length === 2 ? dateSet.minute = nowDate.getMinutes().toString(): dateSet.minute = '0' + nowDate.getMinutes();
+(nowDate.getMonth() + 1).toString().length === 2?
+    dateSet.month = (nowDate.getMonth() + 1).toString(): 
+    dateSet.month = '0' + (nowDate.getMonth() + 1);
+nowDate.getDate().toString().length === 2 ?
+    dateSet.day = nowDate.getDate().toString(): 
+    dateSet.day = '0' + nowDate.getDate();
+nowDate.getHours().toString().length === 2 ? 
+    dateSet.hour = nowDate.getHours().toString(): 
+    dateSet.hour = '0' + nowDate.getHours();
+nowDate.getMinutes().toString().length === 2 ? 
+    dateSet.minute = nowDate.getMinutes().toString(): 
+    dateSet.minute = '0' + nowDate.getMinutes();
 
 console.log(dateSet);
 console.log(nowDate);
