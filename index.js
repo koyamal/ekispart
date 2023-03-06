@@ -59,6 +59,14 @@ const getDepatureTime = async function(){
     return depatureTimes;
 }
 
-getDepatureTime().then(result=> {
-    console.log(result);
-});
+// getDepatureTime().then(result=> {
+//     console.log(result);
+// });
+
+const fn1 = async function(){
+    const aa = await getDepatureTime().then(result=> {
+        console.log(result[0]);
+    });
+}
+
+fn1();
