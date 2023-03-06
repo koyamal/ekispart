@@ -39,13 +39,13 @@ const getStartEndTime = function(timeText){
 }
 
 const getDepatureTime = async function(){
+    let depatureTimes = [];
     const body = await axios(
         url
         ).then(
             function(response){
                 const rowData = response.data;
                 const devidedData = rowData.split('\n');
-                let depatureTimes = [];
 
                 for(let i = 0; i < devidedData.length; i++){
                     if(devidedData[i].includes(tgtText)){
@@ -56,6 +56,9 @@ const getDepatureTime = async function(){
                 }
                 console.log(depatureTimes);
             });
+    return 'This is async function';
 }
 
-getDepatureTime();
+getDepatureTime().then(result=> {
+    console.log(result);
+});
