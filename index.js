@@ -56,7 +56,7 @@ const getDepatureTime = async function(){
                 }
                 console.log(depatureTimes);
             });
-    return 'This is async function';
+    return depatureTimes;
 }
 
 getDepatureTime().then(result=> {
