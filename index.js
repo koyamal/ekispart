@@ -22,16 +22,6 @@ const createDateSet = function(){
     return dateSet;
 }
 
-// const dateSet = createDateSet();
-
-// console.log(dateSet);
-
-// const urlCommonPart = dotenv.config().parsed.ekiUrl;
-// const urlTimePart = `&yyyymm=${dateSet.year}${dateSet.month}&day=${dateSet.day}&hour=${dateSet.hour}&minute10=${dateSet.minute[0]}&minute1=${dateSet.minute[1]}`;
-// const url = urlCommonPart + urlTimePart;
-
-// const tgtText = dotenv.config().parsed.targetText;
-
 const getStartEndTime = function(timeText){
     let startTime = "";
     let endTime = "";
@@ -98,23 +88,15 @@ const init = async function(){
         //     { startTime: '20:43', endTime: '20:55' }
         //   ]
         console.log('dpt: ', dpt);
-        // speakOutput = `次のバスは${calDiffNowAndDpt(dpt[0], dateSet)}分後の${dpt[0].startTime}で、`;
-        // for(let i = 1; i < dpt.length; i++){
-        //     speakOutput += `その次は${calDiffNowAndDpt(dpt[i], dateSet)}分後の${dpt[i].startTime}で`;
-        // }
-        // speakOutput += 'す。'
         
         dpt[1]? 
             speakOutput = `次のバスは${calDiffNowAndDpt(dpt[0], dateSet)}分後の${dpt[0].startTime}で、その次は${calDiffNowAndDpt(dpt[1], dateSet)}分後の${dpt[1].startTime}です。`:
             speakOutput = `次のバスは${calDiffNowAndDpt(dpt[0], dateSet)}分後の${dpt[0].startTime}です。`;
-        
-        //speakOutput = `次のバスは${calDiffNowAndDpt(dpt[0], dateSet)}分後の${dpt[0].startTime}で、その次は${calDiffNowAndDpt(dpt[1], dateSet)}分後の${dpt[1].startTime}です。`;
 
     }catch(e){
         speakOutput = e.message;
     }
     console.log(speakOutput);
 }
-// console.log('checkaxios: ', checkaxios());
 
 init();
