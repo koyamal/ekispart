@@ -22,15 +22,15 @@ const createDateSet = function(){
     return dateSet;
 }
 
-const dateSet = createDateSet();
+// const dateSet = createDateSet();
 
 // console.log(dateSet);
 
-const urlCommonPart = dotenv.config().parsed.ekiUrl;
-const urlTimePart = `&yyyymm=${dateSet.year}${dateSet.month}&day=${dateSet.day}&hour=${dateSet.hour}&minute10=${dateSet.minute[0]}&minute1=${dateSet.minute[1]}`;
-const url = urlCommonPart + urlTimePart;
+// const urlCommonPart = dotenv.config().parsed.ekiUrl;
+// const urlTimePart = `&yyyymm=${dateSet.year}${dateSet.month}&day=${dateSet.day}&hour=${dateSet.hour}&minute10=${dateSet.minute[0]}&minute1=${dateSet.minute[1]}`;
+// const url = urlCommonPart + urlTimePart;
 
-const tgtText = dotenv.config().parsed.targetText;
+// const tgtText = dotenv.config().parsed.targetText;
 
 const getStartEndTime = function(timeText){
     let startTime = "";
@@ -43,7 +43,14 @@ const getStartEndTime = function(timeText){
     return {startTime, endTime};
 }
 
-const getDepatureTime = async function(){
+const getDepatureTime = async function(dateSet){
+
+    const urlCommonPart = dotenv.config().parsed.ekiUrl;
+    const urlTimePart = `&yyyymm=${dateSet.year}${dateSet.month}&day=${dateSet.day}&hour=${dateSet.hour}&minute10=${dateSet.minute[0]}&minute1=${dateSet.minute[1]}`;
+    const url = urlCommonPart + urlTimePart;
+    
+    const tgtText = dotenv.config().parsed.targetText;
+
     const response = await axios(url);
     let depatureTimes = [];
 
@@ -83,9 +90,10 @@ const calDiffNowAndDpt = function(dptime, nowtime){
 }
 
 const init = async function(){
+    const dateSet = createDateSet();
     let speakOutput;
     try{
-        const dpt = await getDepatureTime();
+        const dpt = await getDepatureTime(dateSet);
         // const dpt = [
         //     { startTime: '20:43', endTime: '20:55' }
         //   ]
