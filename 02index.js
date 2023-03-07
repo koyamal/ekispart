@@ -59,14 +59,22 @@ const checkaxios = async function(){
     }
     // console.log(depatureTimes);
 
+    if(!depatureTimes.length){
+        throw new Error('No Data');
+    }
+
     return depatureTimes;
 }
 
 const init = async function(){
-    const dpt = await checkaxios();
-    console.log('dpt: ', dpt);
-
-    const outputText = `時刻は${dpt[0].startTime}です。`
+    let outputText;
+    try{
+        const dpt = await checkaxios();
+        console.log('dpt: ', dpt);
+        outputText = `時刻は${dpt[0].startTime}です。`
+    }catch(e){
+        outputText = e.message;
+    }
     console.log(outputText);
 }
 // console.log('checkaxios: ', checkaxios());
