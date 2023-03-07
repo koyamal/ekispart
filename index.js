@@ -98,7 +98,7 @@ const init = async function(){
         
         dpt[1]? 
             speakOutput = `次のバスは${calDiffNowAndDpt(dpt[0], dateSet)}分後の${dpt[0].startTime}で、その次は${calDiffNowAndDpt(dpt[1], dateSet)}分後の${dpt[1].startTime}です。`:
-            speakOutput = `次のバスは${calDiffNowAndDpt(dpt[0], dateSet)}分後の${dpt[0].startTime}です。`
+            speakOutput = `次のバスは${calDiffNowAndDpt(dpt[0], dateSet)}分後の${dpt[0].startTime}です。`;
         
         //speakOutput = `次のバスは${calDiffNowAndDpt(dpt[0], dateSet)}分後の${dpt[0].startTime}で、その次は${calDiffNowAndDpt(dpt[1], dateSet)}分後の${dpt[1].startTime}です。`;
 
