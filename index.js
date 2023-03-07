@@ -90,11 +90,11 @@ const init = async function(){
         //     { startTime: '20:43', endTime: '20:55' }
         //   ]
         console.log('dpt: ', dpt);
-        speakOutput = `次のバスは${calDiffNowAndDpt(dpt[0], dateSet)}分後の${dpt[0].startTime}で、`;
-        for(let i = 1; i < dpt.length; i++){
-            speakOutput += `その次は${calDiffNowAndDpt(dpt[i], dateSet)}分後の${dpt[i].startTime}で`;
-        }
-        speakOutput += 'す。'
+        // speakOutput = `次のバスは${calDiffNowAndDpt(dpt[0], dateSet)}分後の${dpt[0].startTime}で、`;
+        // for(let i = 1; i < dpt.length; i++){
+        //     speakOutput += `その次は${calDiffNowAndDpt(dpt[i], dateSet)}分後の${dpt[i].startTime}で`;
+        // }
+        // speakOutput += 'す。'
         
         dpt[1]? 
             speakOutput = `次のバスは${calDiffNowAndDpt(dpt[0], dateSet)}分後の${dpt[0].startTime}で、その次は${calDiffNowAndDpt(dpt[1], dateSet)}分後の${dpt[1].startTime}です。`:
