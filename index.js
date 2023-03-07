@@ -1,25 +1,45 @@
 const axios = require("axios");
 const dotenv = require("dotenv");
 
-const createDateSet = function(){
+const minuteLater = 5;
+
+const createDateSet = function(minuteLater){
     const nowDate = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000));
-    const dateSet = {}
+    const dateSetNow = {}
 
-    dateSet.year = nowDate.getFullYear().toString();
+    dateSetNow.year = nowDate.getFullYear().toString();
     (nowDate.getMonth() + 1).toString().length === 2?
-        dateSet.month = (nowDate.getMonth() + 1).toString(): 
-        dateSet.month = '0' + (nowDate.getMonth() + 1);
+        dateSetNow.month = (nowDate.getMonth() + 1).toString(): 
+        dateSetNow.month = '0' + (nowDate.getMonth() + 1);
     nowDate.getDate().toString().length === 2 ?
-        dateSet.day = nowDate.getDate().toString(): 
-        dateSet.day = '0' + nowDate.getDate();
+        dateSetNow.day = nowDate.getDate().toString(): 
+        dateSetNow.day = '0' + nowDate.getDate();
     nowDate.getHours().toString().length === 2 ? 
-        dateSet.hour = nowDate.getHours().toString(): 
-        dateSet.hour = '0' + nowDate.getHours();
+        dateSetNow.hour = nowDate.getHours().toString(): 
+        dateSetNow.hour = '0' + nowDate.getHours();
     nowDate.getMinutes().toString().length === 2 ? 
-        dateSet.minute = nowDate.getMinutes().toString(): 
-        dateSet.minute = '0' + nowDate.getMinutes();
+        dateSetNow.minute = nowDate.getMinutes().toString(): 
+        dateSetNow.minute = '0' + nowDate.getMinutes();
+    
+    const dateSetLater = {};
+    nowDate.setMinutes(nowDate.getMinutes() + minuteLater);
 
-    return dateSet;
+    dateSetLater.year = nowDate.getFullYear().toString();
+    (nowDate.getMonth() + 1).toString().length === 2?
+        dateSetLater.month = (nowDate.getMonth() + 1).toString(): 
+        dateSetLater.month = '0' + (nowDate.getMonth() + 1);
+    nowDate.getDate().toString().length === 2 ?
+        dateSetLater.day = nowDate.getDate().toString(): 
+        dateSetLater.day = '0' + nowDate.getDate();
+    nowDate.getHours().toString().length === 2 ? 
+        dateSetLater.hour = nowDate.getHours().toString(): 
+        dateSetLater.hour = '0' + nowDate.getHours();
+    nowDate.getMinutes().toString().length === 2 ? 
+        dateSetLater.minute = nowDate.getMinutes().toString(): 
+        dateSetLater.minute = '0' + nowDate.getMinutes();
+
+    console.log(dateSetNow, dateSetLater);
+    return {dateSetNow, dateSetLater};
 }
 
 const getStartEndTime = function(timeText){
@@ -80,18 +100,18 @@ const calDiffNowAndDpt = function(dptime, nowtime){
 }
 
 const init = async function(){
-    const dateSet = createDateSet();
+    const dateSet = createDateSet(10);
     let speakOutput;
     try{
-        const dpt = await getDepatureTime(dateSet);
+        const dpt = await getDepatureTime(dateSet.dateSetLater);
         // const dpt = [
         //     { startTime: '20:43', endTime: '20:55' }
         //   ]
         console.log('dpt: ', dpt);
         
         dpt[1]? 
-            speakOutput = `次のバスは${calDiffNowAndDpt(dpt[0], dateSet)}分後の${dpt[0].startTime}で、その次は${calDiffNowAndDpt(dpt[1], dateSet)}分後の${dpt[1].startTime}です。`:
-            speakOutput = `次のバスは${calDiffNowAndDpt(dpt[0], dateSet)}分後の${dpt[0].startTime}です。`;
+            speakOutput = `次のバスは${calDiffNowAndDpt(dpt[0], dateSet.dateSetNow)}分後の${dpt[0].startTime}で、その次は${calDiffNowAndDpt(dpt[1], dateSet.dateSetNow)}分後の${dpt[1].startTime}です。`:
+            speakOutput = `次のバスは${calDiffNowAndDpt(dpt[0], dateSet.dateSetNow)}分後の${dpt[0].startTime}です。`;
 
     }catch(e){
         speakOutput = e.message;
