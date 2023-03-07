@@ -103,15 +103,15 @@ const init = async function(){
     const dateSet = createDateSet(10);
     let speakOutput;
     try{
-        const dpt = await getDepatureTime(dateSet);
+        const dpt = await getDepatureTime(dateSet.dateSetLater);
         // const dpt = [
         //     { startTime: '20:43', endTime: '20:55' }
         //   ]
         console.log('dpt: ', dpt);
         
         dpt[1]? 
-            speakOutput = `次のバスは${calDiffNowAndDpt(dpt[0], dateSet)}分後の${dpt[0].startTime}で、その次は${calDiffNowAndDpt(dpt[1], dateSet)}分後の${dpt[1].startTime}です。`:
-            speakOutput = `次のバスは${calDiffNowAndDpt(dpt[0], dateSet)}分後の${dpt[0].startTime}です。`;
+            speakOutput = `次のバスは${calDiffNowAndDpt(dpt[0], dateSet.dateSetNow)}分後の${dpt[0].startTime}で、その次は${calDiffNowAndDpt(dpt[1], dateSet.dateSetNow)}分後の${dpt[1].startTime}です。`:
+            speakOutput = `次のバスは${calDiffNowAndDpt(dpt[0], dateSet.dateSetNow)}分後の${dpt[0].startTime}です。`;
 
     }catch(e){
         speakOutput = e.message;
