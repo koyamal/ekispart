@@ -74,7 +74,7 @@ const getDepatureTime = async function(dateSet){
             depatureTimes.push(startEndTime);
         }
     }
-    // console.log(depatureTimes);
+    console.log(depatureTimes);
 
     if(!depatureTimes.length){
         throw new Error('No Data');
@@ -90,8 +90,8 @@ const calDiffNowAndDpt = function(dptime, nowtime){
     let diffTime;
     if(dpHour === nowtime.hour){
         diffTime = dpMinute - nowtime.minute;
-    }else if(dpHour - nowtime.hour === 1){
-        diffTime = 60 + (dpMinute - nowtime.minute);
+    }else if(dpHour - nowtime.hour >= 1){
+        diffTime = 60 * (dpHour - nowtime.hour) + (dpMinute - nowtime.minute);
     }else{
         diffTime = 'エラー';
     }
@@ -99,8 +99,8 @@ const calDiffNowAndDpt = function(dptime, nowtime){
     return diffTime;
 }
 
-const init = async function(){
-    const dateSet = createDateSet(10);
+const init = async function(minLate = 0){
+    const dateSet = createDateSet(minLate);
     let speakOutput;
     try{
         const dpt = await getDepatureTime(dateSet.dateSetLater);
@@ -119,4 +119,4 @@ const init = async function(){
     console.log(speakOutput);
 }
 
-init();
+init(130);
