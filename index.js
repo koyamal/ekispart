@@ -80,6 +80,10 @@ const getDepatureTime = async function(dateSet){
         throw new Error('No Data');
     }
 
+    if(depatureTimes[0].startTime === '<p cl'){
+        throw new Error('No Data');
+    }
+
     return depatureTimes;
 }
 
